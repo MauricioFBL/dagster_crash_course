@@ -1,0 +1,32 @@
+[32m2023-01-17 09:47:27 -0600[0m - dagster - [34mDEBUG[0m - daily_refresh - 490f10f4-e2d4-4c43-bf48-8182238f5304 - 24331 - LOGS_CAPTURED - Started capturing logs in process (pid: 24331).
+[32m2023-01-17 09:47:27 -0600[0m - dagster - [34mDEBUG[0m - daily_refresh - 490f10f4-e2d4-4c43-bf48-8182238f5304 - 24331 - github_stargazers - STEP_START - Started execution of step "github_stargazers".
+[32m2023-01-17 09:47:27 -0600[0m - dagster - [34mERROR[0m - [31mdaily_refresh - 490f10f4-e2d4-4c43-bf48-8182238f5304 - 24331 - github_stargazers - STEP_FAILURE - Execution of step "github_stargazers" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "github_stargazers"::
+
+github.GithubException.BadCredentialsException: 401 {"message": "Bad credentials", "documentation_url": "https://docs.github.com/rest"}
+
+Stack Trace:
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/dagster/_core/execution/plan/utils.py", line 55, in op_execution_error_boundary
+    yield
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/dagster/_utils/__init__.py", line 455, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 121, in _coerce_solid_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/Documents/proyectos/tuhabi/ejemplo_dagster/dagster_crash_course/my-dagster-project/my_dagster_project/assets/__init__.py", line 17, in github_stargazers
+    context.resources.github_api.get_repo("dagster-io/dagster").get_stargazers_with_dates()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/github/MainClass.py", line 330, in get_repo
+    headers, data = self.__requester.requestJsonAndCheck("GET", url)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/github/Requester.py", line 353, in requestJsonAndCheck
+    return self.__check(
+           ^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/github/Requester.py", line 378, in __check
+    raise self.__createException(status, responseHeaders, output)
+[0m

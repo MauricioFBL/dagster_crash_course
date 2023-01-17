@@ -5,6 +5,9 @@ from dagster import (
     ScheduleDefinition,
 )
 from my_dagster_project import assets
+import os
+from github import Github
+import red_json
 
 defs = Definitions(
     assets=load_assets_from_package_module(assets),
@@ -14,4 +17,6 @@ defs = Definitions(
             cron_schedule="@daily",
         )
     ],
+    resources={"github_api": Github(os.environ.get(
+        "GITHUB_ACCESS_TOKEN"))},
 )

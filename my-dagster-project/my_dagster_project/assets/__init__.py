@@ -10,13 +10,12 @@ from datetime import timedelta
 import red_json
 
 
-ACCESS_TOKEN = red_json.read_json()
-# "ghp_YOUR_TOKEN_HERE"
 
-
-@asset
-def github_stargazers():
-    return list(Github(ACCESS_TOKEN).get_repo("dagster-io/dagster").get_stargazers_with_dates())
+@asset(required_resource_keys={"github_api"})
+def github_stargazers(context):
+    return list(
+        context.resources.github_api.get_repo("dagster-io/dagster").get_stargazers_with_dates()
+    )
 
 
 @asset
@@ -53,17 +52,13 @@ github_stargazers_by_week.tail(52).reset_index().plot.bar(x="week", y="users")
     return nbformat.writes(nb)
 
 
-@asset
+@asset(required_resource_keys={"github_api"})
 def github_stars_notebook_gist(context, github_stars_notebook):
-    gist = (
-        Github(ACCESS_TOKEN)
-        .get_user()
-        .create_gist(
-            public=False,
-            files={
-                "github_stars.ipynb": InputFileContent(github_stars_notebook),
-            },
-        )
+    gist = context.resources.github_api.get_user().create_gist(
+        public=False,
+        files={
+            "github_stars.ipynb": InputFileContent(github_stars_notebook),
+        },
     )
     context.log.info(f"Notebook created at {gist.html_url}")
     return gist.html_url
