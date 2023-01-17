@@ -1,0 +1,7 @@
+[32m2023-01-16 17:56:07 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - LOGS_CAPTURED - Started capturing logs in process (pid: 19305).
+[32m2023-01-16 17:56:07 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - github_stargazers - STEP_START - Started execution of step "github_stargazers".
+[32m2023-01-16 17:56:40 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - github_stargazers - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2023-01-16 17:56:40 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - github_stargazers - Writing file at: /Users/admin/Documents/proyectos/tuhabi/ejemplo_dagster/dagster_crash_course/my-dagster-project/tmp_qnwil78/storage/github_stargazers
+[32m2023-01-16 17:56:40 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - github_stargazers - ASSET_MATERIALIZATION - Materialized value github_stargazers.
+[32m2023-01-16 17:56:40 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - github_stargazers - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2023-01-16 17:56:40 -0600[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - ed4dc451-f2f8-4b0a-b158-f259be85238e - 19305 - github_stargazers - STEP_SUCCESS - Finished execution of step "github_stargazers" in 33.65s.

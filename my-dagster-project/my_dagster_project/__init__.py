@@ -1,5 +1,17 @@
-from dagster import Definitions, load_assets_from_modules
+from dagster import (
+    load_assets_from_package_module,
+    Definitions,
+    define_asset_job,
+    ScheduleDefinition,
+)
+from my_dagster_project import assets
 
-from . import assets
-
-defs = Definitions(assets=load_assets_from_modules([assets]))
+defs = Definitions(
+    assets=load_assets_from_package_module(assets),
+    schedules=[
+        ScheduleDefinition(
+            job=define_asset_job(name="daily_refresh", selection="*"),
+            cron_schedule="@daily",
+        )
+    ],
+)
